@@ -1,5 +1,7 @@
 package com.BankingAPI.BankingAPIDEMO.deposit;
 
+import com.BankingAPI.BankingAPIDEMO.account.Account;
+
 import javax.persistence.*;
 @Entity
 public class Deposit {
