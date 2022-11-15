@@ -16,16 +16,13 @@ import javax.persistence.OneToMany;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "customer_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+
     private String first_name;
-    @Column(nullable = false)
     private String last_name;
-    @Column(nullable = false)
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Address> address;
+    private Set<Address> adressSet;
 
     public Long getId() {
         return id;
@@ -35,12 +32,12 @@ public class Customer {
         this.id = id;
     }
 
-    public String getFirst_name() {
+    public String getFrist_name() {
         return first_name;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFrist_name(String frist_name) {
+        this.first_name = frist_name;
     }
 
     public String getLast_name() {
@@ -51,11 +48,21 @@ public class Customer {
         this.last_name = last_name;
     }
 
-    public Set<Address> getAddress() {
-        return address;
+    public Set<Address> getAdressSet() {
+        return adressSet;
     }
 
-    public void setAddress(Set<Address> address) {
-        this.address = address;
+    public void setAdressSet(Set<Address> adressSet) {
+        this.adressSet = adressSet;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", adressSet=" + adressSet +
+                '}';
     }
 }
