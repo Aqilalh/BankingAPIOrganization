@@ -14,27 +14,36 @@ import java.util.Optional;
 public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    AccountService accountService;
 
-    public void createCustomer(Customer customer) {
+    public Customer createCustomer(Customer customer) {
+
+        return customerRepository.save(customer);
+    }
+
+    public List<Customer> getAllCustomers() {
+        List<Customer> listOfCustomers = new ArrayList<>();
+        customerRepository.findAll().forEach(listOfCustomers :: add);
+        return listOfCustomers;
+    }
+
+
+    public Optional<Customer> getCustomerById(Long id) {
+        return customerRepository.findById(id);
+    }
+
+    public void updateCustomer(Customer customer) {
         customerRepository.save(customer);
     }
 
-    public ResponseEntity<Iterable<Customer>> getAllCustomers() {
-        Iterable<Customer> allCustomers = customerRepository.findAll();
-        return new ResponseEntity<>(customerRepository.findAll(), HttpStatus.OK);
+    public Optional<Customer> getCustomerByAccountId(Long account_id) {
+        Long customerId = accountService.getAccountByAccountId(account_id).get().getId();
+        return customerRepository.findById(customerId);
     }
 
-    public ResponseEntity<?> getCustomerById(Long customerId) {
-        Optional<Customer> c = customerRepository.findById(customerId);
-        return new ResponseEntity<>(c, HttpStatus.OK);
-    }
-
-    public void updateCustomer(Customer customer, Long Id) {
-        customerRepository.save(customer);
-    }
-
-    public ResponseEntity<?> getCustomerByAccountId (Long accountId){
-        Optional<Customer> c = customerRepository.findById(accountId);
-        return new ResponseEntity<>(c,HttpStatus.OK);
+    public boolean customerCheck(Long customerId){
+        Customer customer = customerRepository.findById(customerId).orElse(null);
+        return customer != null;
     }
 }

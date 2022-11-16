@@ -8,21 +8,18 @@ import javax.persistence.*;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Long id;
-    @Column(nullable = false)
+
     @Enumerated(EnumType.STRING)
-    AccountType type;
+    AccountType accountType;
     private String nickname;
-    @Column(nullable = false)
     private Integer rewards;
-    @Column(nullable = false)
     private Double balance;
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "customerId")
     private Customer customer;
 
-    public Account(){
-
+    public Account() {
     }
 
     public Long getId() {
@@ -33,12 +30,12 @@ public class Account {
         this.id = id;
     }
 
-    public AccountType getType() {
-        return type;
+    public AccountType getAccountType() {
+        return accountType;
     }
 
-    public void setType(AccountType type) {
-        this.type = type;
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 
     public String getNickname() {
@@ -77,7 +74,7 @@ public class Account {
     public String toString() {
         return "Account{" +
                 "id=" + id +
-                ", type=" + type +
+                ", accountType=" + accountType +
                 ", nickname='" + nickname + '\'' +
                 ", rewards=" + rewards +
                 ", balance=" + balance +

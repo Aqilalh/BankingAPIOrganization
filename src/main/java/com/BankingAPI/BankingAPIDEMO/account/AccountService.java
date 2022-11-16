@@ -25,14 +25,14 @@ public class AccountService {
         return accountRepository.findById(accountId);
     }
 
-    public Iterable<Account> getAllAccountsByCustomer(Long customerId) {
+    public Iterable<Account> getAllAccountsByCustomerId(Long customerId) {
         return accountRepository.findAllByCustomerId(customerId);
     }
 
-//    public boolean customerCheck(Long accountId) {
-//        Customer customer = customerRepository.findById(accountId).orElse(null);
-//        return customer != null;
-//    }
+    public boolean customerCheck(Long accountId) {
+        Customer customer = customerRepository.findById(accountId).orElse(null);
+        return customer != null;
+    }
 
     public boolean accountCheck(Long accountId) {
         Account account = getAccountByAccountId(accountId).orElse(null);
