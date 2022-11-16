@@ -12,17 +12,25 @@ import javax.persistence.OneToMany;
 
 
 @Entity
-@Table(name = "customer")
 public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String first_name;
-    private String last_name;
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Address> adressSet;
+    private String firstName;
+
+    private String lastName;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    private Set<Address> addresses;
+
+    public Customer() {
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
 
     public Long getId() {
         return id;
@@ -32,37 +40,38 @@ public class Customer {
         this.id = id;
     }
 
-    public String getFrist_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFrist_name(String frist_name) {
-        this.first_name = frist_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public Set<Address> getAdressSet() {
-        return adressSet;
+    public Set<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setAdressSet(Set<Address> adressSet) {
-        this.adressSet = adressSet;
+    public void listOfAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
     }
 
     @Override
     public String toString() {
         return "Customer{" +
                 "id=" + id +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", adressSet=" + adressSet +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                //", customerId=" + customerId +
+                ", addresses=" + addresses +
                 '}';
     }
 }
