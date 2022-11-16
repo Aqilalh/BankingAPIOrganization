@@ -35,11 +35,14 @@ public class AccountService {
     }
 
     public boolean accountCheck(Long accountId) {
-        Account account = getAccountByAccountId(accountId).orElse(null);
-        return account != null;
+        Account account;
+        if(accountId != null){
+            getAccountByAccountId(accountId);
+        }
+        return false;
     }
 
-    public Account createAccount(Account account) {
+    public Account createAccount(Account account){
         return accountRepository.save(account);
     }
 

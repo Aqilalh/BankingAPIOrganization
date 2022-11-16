@@ -15,9 +15,8 @@ public class Account {
     private String nickname;
     private Integer rewards;
     private Double balance;
-    @ManyToOne
-    @JoinColumn(name = "customerId")
-    private Customer customer;
+
+    private Long customerId;
 
     public Account() {
     }
@@ -62,12 +61,12 @@ public class Account {
         this.balance = balance;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     @Override
@@ -78,7 +77,7 @@ public class Account {
                 ", nickname='" + nickname + '\'' +
                 ", rewards=" + rewards +
                 ", balance=" + balance +
-                ", customer=" + customer +
+                ", customerId=" + customerId +
                 '}';
     }
 }

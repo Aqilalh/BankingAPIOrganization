@@ -28,6 +28,10 @@ public class Customer {
     public Customer() {
     }
 
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
+
     public Long getId() {
         return id;
     }
@@ -66,6 +70,7 @@ public class Customer {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                //", customerId=" + customerId +
                 ", addresses=" + addresses +
                 '}';
     }

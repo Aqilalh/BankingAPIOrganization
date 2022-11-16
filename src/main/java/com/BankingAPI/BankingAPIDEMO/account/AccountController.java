@@ -54,7 +54,7 @@ public class AccountController {
         try {
             if (accountService.customerCheck(customerId)) {
                 CodeMessageSuccess response = new CodeMessageSuccess(201, "Account created", accountService.createAccount(account));
-                return new ResponseEntity<>(response, HttpStatus.CREATED);
+                return new ResponseEntity<>(response, HttpStatus.OK);
             }
             CodeMessageError exception = new CodeMessageError(404, "Error creating account: Customer not found");
             return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
