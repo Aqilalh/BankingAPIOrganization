@@ -34,11 +34,11 @@ public class WithDrawalController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/accounts/{accountId}/withdrawals")
+    @PostMapping("/accounts/{accountId}/withdrawals")
     public ResponseEntity<?> createWithdrawal(@PathVariable Long accountId, @RequestBody WithDrawal withdrawal) {
 
         try {
-            if (!withDrawalService.(accountId)) {
+            if (!withDrawalService.accountCheck(accountId)) {
                 CodeMessageError exception = new CodeMessageError(404, "Error creating withdrawal: Account not found");
                 return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
             } else if (withdrawal.getAmount() >= accountRepository.findById(accountId).get().getBalance()) {
@@ -57,20 +57,41 @@ public class WithDrawalController {
         }
     }
 
-    @PostMapping("/accounts/{accountId}/withdrawals")
-    public void createWithdrawal(@RequestBody WithDrawal withDrawl, @PathVariable Long accountId) {
-        withDrawalService.createWithdrawals(withDrawl, accountId);
+    @GetMapping("/accounts/{accountId}/withdrawals")public ResponseEntity<?> getWithdrawalById(@PathVariable Long withdrawalId){
+
+        Optional<WithDrawal> withdrawal =  withDrawalService.getWithdrawalByWithdrawalId(withdrawalId);
+        if(withdrawal.isEmpty()){
+            CodeMessageError exception = new CodeMessageError("error fetching withdrawal with withdrawal id " + withdrawalId);
+            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+        }
+        CodeData response = new CodeData(200, withdrawal);
+        return new ResponseEntity<> (response, HttpStatus.OK);
     }
+
 
     @PutMapping("/withdrawal/{withdrawalId}")
-    public void updateWithdrawal(@PathVariable Long withdrawalId, WithDrawal withDrawl) {
-       withDrawalService.updateWithdrawal(withDrawl, withdrawalId);
+    public ResponseEntity<?> updateWithdrawal(@PathVariable Long withdrawalId, @RequestBody WithDrawal withdrawal) {
+        if (!withDrawalService.withdrawalCheck(withdrawalId)) {
+            CodeMessageError exception = new CodeMessageError("Withdrawal ID does not exist");
+            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+        }
+
+        withDrawalService.updateWithdrawal(withdrawal, withdrawalId);
+        CodeMessageError response = new CodeMessageError(202, "Accepted withdrawal modification");
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+    }
+    @DeleteMapping("/withdrawal/{withdrawalId}")
+        public ResponseEntity<?> deleteWithdrawal(@PathVariable Long withdrawalId){
+
+            if(!withDrawalService.withdrawalCheck(withdrawalId)){
+                CodeMessageError exception = new CodeMessageError("This id does not exist in withdrawals");
+                return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+            }
+
+            withDrawalService.deleteWithdrawal(withdrawalId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 
-    @DeleteMapping("/withdrawal/{withdrawalId}")
-    public void deleteWithdrawalById(@PathVariable Long id) {
-        withDrawalService.deleteWithdrawals(id);
-    }
-}
 
 

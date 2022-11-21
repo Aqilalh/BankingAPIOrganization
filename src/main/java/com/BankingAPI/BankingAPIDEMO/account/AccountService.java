@@ -35,7 +35,7 @@ public class AccountService {
     }
 
     public boolean accountCheck(Long accountId) {
-        Account account;
+        Account accountCheck;
         if(accountId != null){
             getAccountByAccountId(accountId);
         }
