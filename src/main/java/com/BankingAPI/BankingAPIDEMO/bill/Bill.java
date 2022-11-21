@@ -11,15 +11,15 @@ public class Bill {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private Status billStatus; //An enumerated value representing the Status of the bill that serializes to a string
-    private String payee; //The entity the bill will be paid to
-    private String nickname; //A nickname for the bill to help identify it
-    private String creation_date; //Date the bill was created
-    private String payment_date; //Date when bill is going to be paid or was paid
-    private Integer recurring_date; //Day of month bill will recur
-    private String upcoming_payment_date; // Next bill payment date, calculated from recurring date
-    private Double payment_amount; //Bill amount
-    private String account_id; //ID of account that this bill is associated with
+    private Status billStatus;
+    private String payee;
+    private String nickname;
+    private String creation_date;
+    private String payment_date;
+    private Integer recurring_date;
+    private String upcoming_payment_date;
+    private Double payment_amount;
+    private String account_id;
 
     public Bill() {
     }
