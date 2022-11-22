@@ -42,3 +42,4 @@ public class CodeMessageSuccess {
         this.data = data;
     }
 }
+

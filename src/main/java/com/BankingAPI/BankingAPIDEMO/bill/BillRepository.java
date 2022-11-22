@@ -18,4 +18,3 @@ public interface BillRepository extends CrudRepository<Bill, Long> {
     @Query(value = "SELECT * FROM bill AS e WHERE e.account_id IN (:accountId)", nativeQuery = true)
     List<Bill> getAllBillsByAccountId(@Param("accountId") List<Long> accountId);
 }
-

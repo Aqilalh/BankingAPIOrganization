@@ -21,7 +21,7 @@ public class DepositController {
     @Autowired
     private AccountService accountService;
 
-    @PostMapping("/accounts/{customerId}/deposit")
+    @PostMapping("/accounts/{accountId}/deposit")
     public ResponseEntity<?> createDeposit(@PathVariable Long accountId, @RequestBody Deposit deposit){
         depositService.createDeposit(accountId,deposit);
         if(!accountService.accountCheck(accountId)){
@@ -73,7 +73,7 @@ public class DepositController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
-    @PutMapping("/deposits/{accountId}/deposit")
+    @PutMapping("/deposits/{depositId}/deposit")
     public ResponseEntity<?> updateDeposit(@PathVariable Long depositId, @RequestBody Deposit deposit){
         if (!depositService.depositCheck(depositId)){
             CodeMessageError updateError = new CodeMessageError(404,"Deposit ID does not exist");
@@ -85,3 +85,4 @@ public class DepositController {
         }
     }
 }
+

@@ -70,8 +70,8 @@ public class WithDrawalService {
 
 
     public boolean accountCheck(Long accountId) {
-            Account account = accountRepository.findById(accountId).orElse(null);
-            return account != null;
+        Account account = accountRepository.findById(accountId).orElse(null);
+        return account != null;
     }
 
     public boolean withdrawalCheck(Long withdrawalId) {
@@ -85,3 +85,4 @@ public class WithDrawalService {
 
 
 }
+

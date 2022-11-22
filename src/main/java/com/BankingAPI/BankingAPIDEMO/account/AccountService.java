@@ -37,7 +37,8 @@ public class AccountService {
     public boolean accountCheck(Long accountId) {
         Account accountCheck;
         if(accountId != null){
-            getAccountByAccountId(accountId);
+//            getAccountByAccountId(accountId)
+            return true;
         }
         return false;
     }
@@ -54,4 +55,3 @@ public class AccountService {
         accountRepository.deleteById(accountId);
     }
 }
-
