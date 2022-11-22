@@ -34,7 +34,7 @@ public class WithDrawalController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/accounts/{accountId}/withdrawals")
+    @PostMapping("withdrawal/{accountId}/withdrawals")
     public ResponseEntity<?> createWithdrawal(@PathVariable Long accountId, @RequestBody WithDrawal withdrawal) {
 
         try {
@@ -57,7 +57,7 @@ public class WithDrawalController {
         }
     }
 
-    @GetMapping("/accounts/{accountId}/withdrawals")public ResponseEntity<?> getWithdrawalById(@PathVariable Long withdrawalId){
+    @GetMapping("withdrawals/{withdrawalId}")public ResponseEntity<?> getWithdrawalById(@PathVariable Long withdrawalId){
 
         Optional<WithDrawal> withdrawal =  withDrawalService.getWithdrawalByWithdrawalId(withdrawalId);
         if(withdrawal.isEmpty()){
@@ -69,7 +69,7 @@ public class WithDrawalController {
     }
 
 
-    @PutMapping("/withdrawal/{withdrawalId}")
+    @PutMapping("/withdrawals/{withdrawalId}")
     public ResponseEntity<?> updateWithdrawal(@PathVariable Long withdrawalId, @RequestBody WithDrawal withdrawal) {
         if (!withDrawalService.withdrawalCheck(withdrawalId)) {
             CodeMessageError exception = new CodeMessageError("Withdrawal ID does not exist");
@@ -80,7 +80,7 @@ public class WithDrawalController {
         CodeMessageError response = new CodeMessageError(202, "Accepted withdrawal modification");
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
-    @DeleteMapping("/withdrawal/{withdrawalId}")
+    @DeleteMapping("/withdrawals/{withdrawalId}")
         public ResponseEntity<?> deleteWithdrawal(@PathVariable Long withdrawalId){
 
             if(!withDrawalService.withdrawalCheck(withdrawalId)){
