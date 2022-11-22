@@ -68,7 +68,7 @@ public class BillController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PutMapping("accounts/{accountId}/bills")
+    @PutMapping("/bills/{billId}")
     public ResponseEntity<?> updateBill(@RequestBody Bill bill, @PathVariable Long billId){
         if(!billService.billCheck(billId)){
             CodeMessageError exception = new CodeMessageError("Bill ID does not exist");

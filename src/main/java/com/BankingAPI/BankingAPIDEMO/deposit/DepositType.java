@@ -15,3 +15,4 @@ public enum DepositType {
         return type;
     }
 }
+

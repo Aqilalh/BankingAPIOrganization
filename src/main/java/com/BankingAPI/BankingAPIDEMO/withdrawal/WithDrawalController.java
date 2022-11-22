@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
+@RestController
 public class WithDrawalController {
 
     @Autowired
@@ -36,7 +36,6 @@ public class WithDrawalController {
 
     @PostMapping("withdrawal/{accountId}/withdrawals")
     public ResponseEntity<?> createWithdrawal(@PathVariable Long accountId, @RequestBody WithDrawal withdrawal) {
-
         try {
             if (!withDrawalService.accountCheck(accountId)) {
                 CodeMessageError exception = new CodeMessageError(404, "Error creating withdrawal: Account not found");
@@ -81,17 +80,18 @@ public class WithDrawalController {
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
     @DeleteMapping("/withdrawals/{withdrawalId}")
-        public ResponseEntity<?> deleteWithdrawal(@PathVariable Long withdrawalId){
+    public ResponseEntity<?> deleteWithdrawal(@PathVariable Long withdrawalId){
 
-            if(!withDrawalService.withdrawalCheck(withdrawalId)){
-                CodeMessageError exception = new CodeMessageError("This id does not exist in withdrawals");
-                return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
-            }
-
-            withDrawalService.deleteWithdrawal(withdrawalId);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        if(!withDrawalService.withdrawalCheck(withdrawalId)){
+            CodeMessageError exception = new CodeMessageError("This id does not exist in withdrawals");
+            return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
         }
+
+        withDrawalService.deleteWithdrawal(withdrawalId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+}
+
 
 
 

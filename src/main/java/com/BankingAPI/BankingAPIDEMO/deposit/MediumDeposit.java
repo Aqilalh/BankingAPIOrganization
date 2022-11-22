@@ -14,3 +14,4 @@ public enum MediumDeposit {
         return medium;
     }
 }
+

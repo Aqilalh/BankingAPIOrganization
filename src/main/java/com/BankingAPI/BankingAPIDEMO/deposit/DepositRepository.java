@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DepositRepository extends CrudRepository<Deposit, Long> {
-    @Query(value = "SELECT * FROM deposit WHERE payeeId = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM deposit WHERE payee_id = ?1", nativeQuery = true)
     Iterable<Deposit> getDepositByAccountId(long accountId);
 }
+
